@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Percentage Calculator USA — Calculate Percentages Instantly | Calqly</title>
+  <meta name="description" content="Calculate percentages instantly — find X% of Y, percentage change, or what percent X is of Y. Free, no sign-up required." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#f9f8f6;--surface:#ffffff;--border:#e5e2dc;--border2:#ccc9c0;--text:#1a1916;--muted:#6b6860;--hint:#9e9b94;--accent:#1a1916;--accent-text:#ffffff;--green:#0d6e4f;--green-bg:#edf7f3;--radius:10px;--radius-lg:14px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6;}
+    header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;}
+    .header-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+    .logo{font-size:16px;font-weight:600;letter-spacing:-0.3px;}
+    .logo span{color:var(--muted);font-weight:400;}
+    nav{display:flex;gap:20px;}
+    nav a{font-size:13px;color:var(--muted);text-decoration:none;}
+    nav a:hover{color:var(--text);}
+    nav a.active{color:var(--text);font-weight:500;}
+    .page{max-width:760px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+    .ad-slot{background:var(--surface);border:1px dashed var(--border2);border-radius:var(--radius);text-align:center;padding:1.5rem;color:var(--hint);font-size:12px;margin-bottom:1.5rem;min-height:90px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;}
+    .hero{margin-bottom:2rem;}
+    .hero h1{font-size:clamp(22px,4vw,30px);font-weight:600;letter-spacing:-0.5px;margin-bottom:6px;}
+    .hero p{color:var(--muted);font-size:14px;}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem;}
+    .card-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+    .card-sub{font-size:13px;color:var(--muted);margin-bottom:1.25rem;}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media(max-width:480px){.grid2{grid-template-columns:1fr;}}
+    .field{margin-bottom:1rem;}
+    .field label{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.4px;}
+    .field input{width:100%;padding:11px 14px;font-size:16px;font-family:'DM Mono',monospace;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);transition:border-color .15s;}
+    .field input:focus{outline:none;border-color:var(--border2);background:var(--surface);}
+    .calc-btn{width:100%;padding:12px;font-size:14px;font-weight:600;font-family:inherit;border:none;border-radius:var(--radius);cursor:pointer;background:var(--accent);color:var(--accent-text);transition:opacity .15s;}
+    .calc-btn:hover{opacity:.88;}
+    .result-row{margin-top:1rem;padding:1rem;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);display:none;}
+    .result-row.show{display:block;}
+    .result-row .lbl{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px;}
+    .result-row .val{font-size:26px;font-weight:600;font-family:'DM Mono',monospace;color:var(--text);}
+    .result-row .formula{font-size:12px;color:var(--hint);margin-top:4px;}
+    .faq{margin-top:2rem;}
+    .faq h2{font-size:18px;font-weight:600;margin-bottom:1rem;letter-spacing:-0.3px;}
+    .faq-item{border-top:1px solid var(--border);padding:1rem 0;}
+    .faq-item h3{font-size:14px;font-weight:500;margin-bottom:6px;}
+    .faq-item p{font-size:13px;color:var(--muted);line-height:1.65;}
+    footer{border-top:1px solid var(--border);background:var(--surface);padding:1.5rem;text-align:center;font-size:12px;color:var(--hint);margin-top:2rem;}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+  </style>
+  <meta name="geo.region" content="US" />
+  <meta name="geo.placename" content="United States" />
+  <meta name="language" content="en-US" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="alternate" hreflang="en-us" href="https://calqly.netlify.app/" />
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372985463894368" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+
+
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:99998;"></div>
+<div id="cookie-modal" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#ffffff;border-top:2px solid #e5e2dc;z-index:99999;font-family:'DM Sans',sans-serif;box-shadow:0 -8px 40px rgba(0,0,0,0.15);">
+  <div style="max-width:760px;margin:0 auto;padding:24px 20px 28px;">
+    <div style="font-size:17px;font-weight:600;color:#1a1916;margin-bottom:8px;">🍪 We use cookies</div>
+    <div style="font-size:13px;color:#6b6860;line-height:1.6;margin-bottom:18px;">
+      We and our partners (Google AdSense) use cookies to show personalized ads and improve your experience.
+      See our <a href="privacy.html" style="color:#0d6e4f;text-decoration:underline;">Privacy Policy</a> for details.
+    </div>
+    <div style="background:#f9f8f6;border:1px solid #e5e2dc;border-radius:10px;padding:16px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Strictly Necessary</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Required for the site to function</div></div>
+        <span style="background:#0d6e4f;color:#fff;font-size:11px;padding:3px 12px;border-radius:20px;font-weight:500;">Always on</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Advertising Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Google AdSense — personalized ads</div></div>
+        <div id="toggle-ads" onclick="ckToggle('ads')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-ads" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Analytics Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Anonymous usage statistics</div></div>
+        <div id="toggle-analytics" onclick="ckToggle('analytics')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-analytics" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="ckAcceptAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#1a1916;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Accept All</button>
+      <button onclick="ckSave()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#1a1916;border:1px solid #ccc9c0;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;">Save Preferences</button>
+      <button onclick="ckRejectAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#6b6860;border:1px solid #e5e2dc;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;">Reject All</button>
+    </div>
+    <div style="font-size:11px;color:#9e9b94;margin-top:12px;text-align:center;">Operated from Vienna, Austria (EU) · GDPR compliant</div>
+  </div>
+</div>
+<script>
+var _ck = {ads:true, analytics:true};
+function ckToggle(t){
+  _ck[t]=!_ck[t];
+  document.getElementById('toggle-'+t).style.background=_ck[t]?'#0d6e4f':'#ccc9c0';
+  document.getElementById('dot-'+t).style.left=_ck[t]?'23px':'3px';
+}
+function ckShow(){
+  document.getElementById('cookie-overlay').style.display='block';
+  document.getElementById('cookie-modal').style.display='block';
+}
+function ckHide(){
+  document.getElementById('cookie-overlay').style.display='none';
+  document.getElementById('cookie-modal').style.display='none';
+}
+function ckAcceptAll(){localStorage.setItem('ck_v2','accepted');ckHide();}
+function ckRejectAll(){localStorage.setItem('ck_v2','rejected');ckHide();}
+function ckSave(){localStorage.setItem('ck_v2','custom');localStorage.setItem('ck_ads',_ck.ads);localStorage.setItem('ck_analytics',_ck.analytics);ckHide();}
+// Always show on first visit — uses new key ck_v2 so old consent is ignored
+if(!localStorage.getItem('ck_v2')){setTimeout(ckShow,200);}
+</script>
+<header>
+  <div class="header-inner">
+    <div class="logo">Calqly <span>/ Percentage</span></div>
+    <nav>
+      <a href="index.html">Loan</a>
+      <a href="bmi.html">BMI</a>
+      <a href="interest.html">Interest</a>
+      <a href="percentage.html" class="active">Percentage</a>
+    </nav>
+  </div>
+</header>
+<div class="page">
+<div class="hero">
+    <h1>Percentage Calculator</h1>
+    <p>Three ways to calculate percentages — fast, free, and no sign-up needed.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">What is X% of Y?</div>
+    <div class="card-sub">Example: What is 15% of $85? → $12.75</div>
+    <div class="grid2">
+      <div class="field"><label>Percentage (%)</label><input type="number" id="p1a" value="15" step="0.1" oninput="c1()"></div>
+      <div class="field"><label>Of this value</label><input type="number" id="p1b" value="85" oninput="c1()"></div>
+    </div>
+    <button class="calc-btn" onclick="c1()">Calculate</button>
+    <div class="result-row" id="r1">
+      <div class="lbl">Answer</div>
+      <div class="val" id="r1v">—</div>
+      <div class="formula" id="r1f"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">X is what percent of Y?</div>
+    <div class="card-sub">Example: 17 is what percent of 85? → 20%</div>
+    <div class="grid2">
+      <div class="field"><label>Part value</label><input type="number" id="p2a" value="17" oninput="c2()"></div>
+      <div class="field"><label>Whole value</label><input type="number" id="p2b" value="85" oninput="c2()"></div>
+    </div>
+    <button class="calc-btn" onclick="c2()">Calculate</button>
+    <div class="result-row" id="r2">
+      <div class="lbl">Percentage</div>
+      <div class="val" id="r2v">—</div>
+      <div class="formula" id="r2f"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Percentage change</div>
+    <div class="card-sub">Example: From $80 to $100 → +25% increase</div>
+    <div class="grid2">
+      <div class="field"><label>Original value</label><input type="number" id="p3a" value="80" oninput="c3()"></div>
+      <div class="field"><label>New value</label><input type="number" id="p3b" value="100" oninput="c3()"></div>
+    </div>
+    <button class="calc-btn" onclick="c3()">Calculate</button>
+    <div class="result-row" id="r3">
+      <div class="lbl">Change</div>
+      <div class="val" id="r3v">—</div>
+      <div class="formula" id="r3f"></div>
+    </div>
+  </div>
+<div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item"><h3>How do I calculate a percentage?</h3><p>To find X% of Y, multiply Y by X and divide by 100. For example, 20% of 50 = 50 × 20 ÷ 100 = 10.</p></div>
+    <div class="faq-item"><h3>How do I find what percentage one number is of another?</h3><p>Divide the part by the whole, then multiply by 100. For example, 25 is what percent of 200? → 25 ÷ 200 × 100 = 12.5%.</p></div>
+    <div class="faq-item"><h3>How do I calculate percentage change?</h3><p>Subtract the original value from the new value, divide by the original, and multiply by 100. A positive result is an increase, negative is a decrease.</p></div>
+    <div class="faq-item"><h3>What is percentage used for in everyday life?</h3><p>Percentages are everywhere — sales tax, discounts, tips, interest rates, salary increases, investment returns, and more. Understanding percentages helps you make smarter financial decisions.</p></div>
+  </div>
+</div>
+<footer>
+  <p>© 2026 Calqly — Free calculators, no sign-up required.</p>
+  <p style="margin-top:6px;">
+    <a href="index.html">Loan</a>
+    <a href="bmi.html">BMI</a>
+    <a href="interest.html">Interest</a>
+    <a href="percentage.html">Percentage</a>
+  </p>
+  <p style="margin-top:6px;">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="contact.html">Contact</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px;">Results are estimates for informational purposes only. Consult a qualified professional before making decisions.</p>
+</footer>
+<script>
+const F=n=>parseFloat(n.toFixed(4));
+function c1(){
+  const p=parseFloat(document.getElementById('p1a').value)||0;
+  const g=parseFloat(document.getElementById('p1b').value)||0;
+  const ans=F(p/100*g);
+  document.getElementById('r1v').textContent=ans.toLocaleString('en-US');
+  document.getElementById('r1f').textContent=p+'% × '+g+' = '+ans;
+  document.getElementById('r1').classList.add('show');
+}
+function c2(){
+  const t=parseFloat(document.getElementById('p2a').value)||0;
+  const g=parseFloat(document.getElementById('p2b').value)||1;
+  const ans=F(t/g*100);
+  document.getElementById('r2v').textContent=ans.toLocaleString('en-US')+'%';
+  document.getElementById('r2f').textContent=t+' ÷ '+g+' × 100 = '+ans+'%';
+  document.getElementById('r2').classList.add('show');
+}
+function c3(){
+  const a=parseFloat(document.getElementById('p3a').value)||1;
+  const b=parseFloat(document.getElementById('p3b').value)||0;
+  const diff=b-a;const pct=F(diff/a*100);
+  document.getElementById('r3v').textContent=(pct>=0?'+':'')+pct.toLocaleString('en-US')+'%';
+  document.getElementById('r3f').textContent='('+b+' − '+a+') ÷ '+a+' × 100 = '+(pct>=0?'+':'')+pct+'%';
+  document.getElementById('r3').classList.add('show');
+}
+c1();c2();c3();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Calqly Percentage Calculator","url":"https://calqly.netlify.app/percentage.html","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free percentage calculator — find X% of Y, percentage change, or what percent X is of Y.","areaServed":{"@type":"Country","name":"United States"}}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Compound Interest Calculator USA — Investment Growth | Calqly</title>
+  <meta name="description" content="Free compound interest calculator. See how your savings, 401k or IRA grows over time. Uses S&P 500 historical returns as reference." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#f9f8f6;--surface:#ffffff;--border:#e5e2dc;--border2:#ccc9c0;--text:#1a1916;--muted:#6b6860;--hint:#9e9b94;--accent:#1a1916;--accent-text:#ffffff;--green:#0d6e4f;--green-bg:#edf7f3;--radius:10px;--radius-lg:14px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6;}
+    header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;}
+    .header-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+    .logo{font-size:16px;font-weight:600;letter-spacing:-0.3px;}
+    .logo span{color:var(--muted);font-weight:400;}
+    nav{display:flex;gap:20px;}
+    nav a{font-size:13px;color:var(--muted);text-decoration:none;}
+    nav a:hover{color:var(--text);}
+    nav a.active{color:var(--text);font-weight:500;}
+    .page{max-width:760px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+    .ad-slot{background:var(--surface);border:1px dashed var(--border2);border-radius:var(--radius);text-align:center;padding:1.5rem;color:var(--hint);font-size:12px;margin-bottom:1.5rem;min-height:90px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;}
+    .hero{margin-bottom:2rem;}
+    .hero h1{font-size:clamp(22px,4vw,30px);font-weight:600;letter-spacing:-0.5px;margin-bottom:6px;}
+    .hero p{color:var(--muted);font-size:14px;}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.25rem;}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media(max-width:480px){.grid2{grid-template-columns:1fr;}}
+    .field{margin-bottom:1rem;}
+    .field label{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.4px;}
+    .field input{width:100%;padding:11px 14px;font-size:16px;font-family:'DM Mono',monospace;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);transition:border-color .15s;}
+    .field input:focus{outline:none;border-color:var(--border2);background:var(--surface);}
+    .field .hint{font-size:11px;color:var(--hint);margin-top:4px;}
+    .calc-btn{width:100%;padding:13px;font-size:15px;font-weight:600;font-family:inherit;border:none;border-radius:var(--radius);cursor:pointer;background:var(--accent);color:var(--accent-text);transition:opacity .15s;}
+    .calc-btn:hover{opacity:.88;}
+    .res{display:none;margin-top:1.5rem;}
+    .res.show{display:block;}
+    .result-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.25rem;}
+    .rc{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
+    .rc.primary{background:var(--accent);border-color:var(--accent);}
+    .rc .lbl{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:5px;}
+    .rc.primary .lbl{color:rgba(255,255,255,0.65);}
+    .rc .val{font-size:20px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:-0.5px;color:var(--text);}
+    .rc.primary .val{color:#fff;}
+    .bar-section{margin-bottom:1.25rem;}
+    .bar-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px;}
+    .bar-track{height:7px;background:var(--border);border-radius:4px;overflow:hidden;}
+    .bar-principal{height:100%;background:var(--accent);border-radius:4px;transition:width .5s;}
+    .bar-interest{height:100%;background:#0d6e4f;border-radius:4px;transition:width .5s;margin-top:-7px;}
+    .tip{background:var(--green-bg);border-left:3px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:10px 14px;font-size:13px;color:#0a4a34;line-height:1.55;margin-bottom:1.25rem;}
+    .tip strong{font-weight:600;}
+    .table-wrap{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;font-size:13px;}
+    th{text-align:left;padding:8px 10px;color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.4px;border-bottom:1px solid var(--border);}
+    td{padding:8px 10px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;}
+    tr:last-child td{border-bottom:none;}
+    .section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--hint);margin:1.25rem 0 .75rem;}
+    .faq{margin-top:2.5rem;}
+    .faq h2{font-size:18px;font-weight:600;margin-bottom:1rem;letter-spacing:-0.3px;}
+    .faq-item{border-top:1px solid var(--border);padding:1rem 0;}
+    .faq-item h3{font-size:14px;font-weight:500;margin-bottom:6px;}
+    .faq-item p{font-size:13px;color:var(--muted);line-height:1.65;}
+    footer{border-top:1px solid var(--border);background:var(--surface);padding:1.5rem;text-align:center;font-size:12px;color:var(--hint);margin-top:2rem;}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+  </style>
+  <meta name="geo.region" content="US" />
+  <meta name="geo.placename" content="United States" />
+  <meta name="language" content="en-US" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="alternate" hreflang="en-us" href="https://calqly.netlify.app/" />
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372985463894368" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+
+
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:99998;"></div>
+<div id="cookie-modal" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#ffffff;border-top:2px solid #e5e2dc;z-index:99999;font-family:'DM Sans',sans-serif;box-shadow:0 -8px 40px rgba(0,0,0,0.15);">
+  <div style="max-width:760px;margin:0 auto;padding:24px 20px 28px;">
+    <div style="font-size:17px;font-weight:600;color:#1a1916;margin-bottom:8px;">🍪 We use cookies</div>
+    <div style="font-size:13px;color:#6b6860;line-height:1.6;margin-bottom:18px;">
+      We and our partners (Google AdSense) use cookies to show personalized ads and improve your experience.
+      See our <a href="privacy.html" style="color:#0d6e4f;text-decoration:underline;">Privacy Policy</a> for details.
+    </div>
+    <div style="background:#f9f8f6;border:1px solid #e5e2dc;border-radius:10px;padding:16px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Strictly Necessary</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Required for the site to function</div></div>
+        <span style="background:#0d6e4f;color:#fff;font-size:11px;padding:3px 12px;border-radius:20px;font-weight:500;">Always on</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Advertising Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Google AdSense — personalized ads</div></div>
+        <div id="toggle-ads" onclick="ckToggle('ads')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-ads" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Analytics Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Anonymous usage statistics</div></div>
+        <div id="toggle-analytics" onclick="ckToggle('analytics')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-analytics" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="ckAcceptAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#1a1916;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Accept All</button>
+      <button onclick="ckSave()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#1a1916;border:1px solid #ccc9c0;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;">Save Preferences</button>
+      <button onclick="ckRejectAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#6b6860;border:1px solid #e5e2dc;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;">Reject All</button>
+    </div>
+    <div style="font-size:11px;color:#9e9b94;margin-top:12px;text-align:center;">Operated from Vienna, Austria (EU) · GDPR compliant</div>
+  </div>
+</div>
+<script>
+var _ck = {ads:true, analytics:true};
+function ckToggle(t){
+  _ck[t]=!_ck[t];
+  document.getElementById('toggle-'+t).style.background=_ck[t]?'#0d6e4f':'#ccc9c0';
+  document.getElementById('dot-'+t).style.left=_ck[t]?'23px':'3px';
+}
+function ckShow(){
+  document.getElementById('cookie-overlay').style.display='block';
+  document.getElementById('cookie-modal').style.display='block';
+}
+function ckHide(){
+  document.getElementById('cookie-overlay').style.display='none';
+  document.getElementById('cookie-modal').style.display='none';
+}
+function ckAcceptAll(){localStorage.setItem('ck_v2','accepted');ckHide();}
+function ckRejectAll(){localStorage.setItem('ck_v2','rejected');ckHide();}
+function ckSave(){localStorage.setItem('ck_v2','custom');localStorage.setItem('ck_ads',_ck.ads);localStorage.setItem('ck_analytics',_ck.analytics);ckHide();}
+// Always show on first visit — uses new key ck_v2 so old consent is ignored
+if(!localStorage.getItem('ck_v2')){setTimeout(ckShow,200);}
+</script>
+<header>
+  <div class="header-inner">
+    <div class="logo">Calqly <span>/ Interest</span></div>
+    <nav>
+      <a href="index.html">Loan</a>
+      <a href="bmi.html">BMI</a>
+      <a href="interest.html" class="active">Interest</a>
+      <a href="percentage.html">Percentage</a>
+    </nav>
+  </div>
+</header>
+<div class="page">
+<div class="hero">
+    <h1>Compound Interest Calculator</h1>
+    <p>See how your money grows over time — with or without monthly contributions.</p>
+  </div>
+  <div class="card">
+    <div class="grid2">
+      <div class="field"><label>Starting Amount ($)</label><input type="number" id="start" value="5000" min="0" oninput="calc()"></div>
+      <div class="field"><label>Years</label><input type="number" id="years" value="20" min="1" max="50" oninput="calc()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Annual Return (%)</label><input type="number" id="rate" value="7" step="0.1" min="0" oninput="calc()"><div class="hint">S&P 500 historical avg: ~7% after inflation</div></div>
+      <div class="field"><label>Monthly Contribution ($)</label><input type="number" id="contrib" value="200" min="0" oninput="calc()"></div>
+    </div>
+    <button class="calc-btn" onclick="calc()">Calculate</button>
+    <div class="res" id="main-res">
+      <div class="result-cards">
+        <div class="rc primary"><div class="lbl">Final balance</div><div class="val" id="r-end">—</div></div>
+        <div class="rc"><div class="lbl">Total contributed</div><div class="val" id="r-put">—</div></div>
+        <div class="rc"><div class="lbl">Interest earned</div><div class="val" id="r-gain">—</div></div>
+        <div class="rc"><div class="lbl">Return</div><div class="val" id="r-pct">—</div></div>
+      </div>
+      <div class="bar-section">
+        <div class="bar-labels"><span id="bl1">Principal</span><span id="bl2">Interest earned</span></div>
+        <div class="bar-track">
+          <div style="display:flex;height:7px;">
+            <div id="bar-p" style="background:var(--accent);transition:width .5s;"></div>
+            <div id="bar-i" style="background:#0d6e4f;transition:width .5s;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="tip" id="tip-box"></div>
+      <div class="section-title">Year-by-year growth</div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Year</th><th>Balance</th><th>Contributed</th><th>Interest</th></tr></thead>
+        <tbody id="tbl-body"></tbody></table>
+      </div>
+    </div>
+  </div>
+<div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item"><h3>What is compound interest?</h3><p>Compound interest means you earn interest not just on your original investment, but also on all the interest you've already earned. Over time, this creates an exponential "snowball" effect that makes your money grow faster and faster.</p></div>
+    <div class="faq-item"><h3>How much should I invest per month?</h3><p>Even $100–$200/month can grow to a significant amount over 20–30 years. The most important factor is starting early — time in the market beats timing the market.</p></div>
+    <div class="faq-item"><h3>What return rate should I use?</h3><p>The S&P 500 has historically returned about 10% annually before inflation, or roughly 7% after inflation. For a conservative estimate, use 6–7%. For bonds or savings accounts, 2–4% is more realistic.</p></div>
+    <div class="faq-item"><h3>How does monthly compounding work?</h3><p>This calculator uses monthly compounding — your interest is calculated and added to your balance every month. This is more accurate than annual compounding and results in slightly higher returns.</p></div>
+  </div>
+</div>
+<footer>
+  <p>© 2026 Calqly — Free calculators, no sign-up required.</p>
+  <p style="margin-top:6px;">
+    <a href="index.html">Loan</a>
+    <a href="bmi.html">BMI</a>
+    <a href="interest.html">Interest</a>
+    <a href="percentage.html">Percentage</a>
+  </p>
+  <p style="margin-top:6px;">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="contact.html">Contact</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px;">Results are estimates for informational purposes only. Consult a qualified professional before making decisions.</p>
+</footer>
+<script>
+const D=n=>'$'+Math.round(n).toLocaleString('en-US');
+function calc(){
+  const K=parseFloat(document.getElementById('start').value)||0;
+  const y=parseInt(document.getElementById('years').value)||1;
+  const r=(parseFloat(document.getElementById('rate').value)||0)/100;
+  const m=parseFloat(document.getElementById('contrib').value)||0;
+  const rM=r/12,n=y*12;
+  let end;
+  if(rM===0){end=K+m*n;}else{end=K*Math.pow(1+rM,n)+m*(Math.pow(1+rM,n)-1)/rM;}
+  const put=K+m*n*12/12*y;
+  const gain=end-(K+m*n);
+  const pct=K+m*n>0?Math.round(gain/(K+m*n)*100):0;
+  document.getElementById('r-end').textContent=D(end);
+  document.getElementById('r-put').textContent=D(K+m*n);
+  document.getElementById('r-gain').textContent=D(gain);
+  document.getElementById('r-pct').textContent='+'+pct+'%';
+  const ppct=Math.round((K+m*n)/end*100);
+  document.getElementById('bar-p').style.width=ppct+'%';
+  document.getElementById('bar-i').style.width=(100-ppct)+'%';
+  document.getElementById('bl1').textContent='Principal ('+ppct+'%)';
+  document.getElementById('bl2').textContent='Interest ('+(100-ppct)+'%)';
+  document.getElementById('tip-box').innerHTML=`<strong>The power of compounding:</strong> Of your <strong>${D(end)}</strong> final balance, you only contributed <strong>${D(K+m*n)}</strong>. Compound interest did the rest — <strong>${D(gain)}</strong> in growth!`;
+  let rows='',bal=K,totalPut=K;
+  for(let i=1;i<=y;i++){
+    const prevBal=bal;
+    if(rM===0){bal+=m*12;}else{bal=prevBal*Math.pow(1+rM,12)+m*(Math.pow(1+rM,12)-1)/rM;}
+    totalPut+=m*12;
+    const int=bal-prevBal-m*12;
+    rows+=`<tr><td>Year ${i}</td><td>${D(bal)}</td><td>${D(totalPut)}</td><td>${D(int)}</td></tr>`;
+  }
+  document.getElementById('tbl-body').innerHTML=rows;
+  document.getElementById('main-res').classList.add('show');
+}
+calc();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Calqly Compound Interest Calculator","url":"https://calqly.netlify.app/interest.html","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free compound interest calculator. See how your savings and investments grow over time.","areaServed":{"@type":"Country","name":"United States"}}
+</script>
+
+
+</body>
+</html>

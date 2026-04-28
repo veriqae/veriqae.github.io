@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Loan Calculator USA — Monthly Payment, Affordability & Payoff Planner | Calqly</title>
+  <meta name="description" content="Free loan calculator for Americans. Calculate monthly payments for mortgage, auto, personal and student loans. No sign-up required." />
+  <meta name="keywords" content="loan calculator, monthly payment calculator, how much can I afford, loan amortization, early payoff calculator, auto loan, mortgage calculator, personal loan" />
+
+  <!-- =====================================================
+       GOOGLE ADSENSE — paste your code here once approved
+       ===================================================== -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --border: #e5e2dc;
+      --border2: #ccc9c0;
+      --text: #1a1916;
+      --muted: #6b6860;
+      --hint: #9e9b94;
+      --accent: #1a1916;
+      --accent-text: #ffffff;
+      --green: #0d6e4f;
+      --green-bg: #edf7f3;
+      --radius: 10px;
+      --radius-lg: 14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+    }
+    .header-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .logo { font-size: 16px; font-weight: 600; letter-spacing: -0.3px; }
+    .logo span { color: var(--muted); font-weight: 400; }
+    nav { display: flex; gap: 20px; }
+    nav a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    nav a.active { color: var(--text); font-weight: 500; }
+    nav a:hover { color: var(--text); }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    /* ── AD SLOTS ── */
+    .ad-slot {
+      background: var(--surface);
+      border: 1px dashed var(--border2);
+      border-radius: var(--radius);
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--hint);
+      font-size: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .ad-slot-leaderboard { min-height: 90px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+    .ad-slot-sidebar { min-height: 250px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+
+    /* ── HERO ── */
+    .hero { margin-bottom: 2rem; }
+    .hero h1 { font-size: clamp(22px, 4vw, 30px); font-weight: 600; letter-spacing: -0.5px; margin-bottom: 6px; }
+    .hero p { color: var(--muted); font-size: 14px; }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── MODE TABS ── */
+    .mode-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .mtab {
+      padding: 8px 16px; font-size: 13px; font-family: inherit;
+      border: 1px solid var(--border); border-radius: 8px;
+      cursor: pointer; background: transparent; color: var(--muted);
+      transition: all .15s;
+    }
+    .mtab:hover { background: var(--bg); color: var(--text); }
+    .mtab.on { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+
+    /* ── LOAN TYPE PILLS ── */
+    .ltype-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .ltab {
+      padding: 5px 14px; font-size: 12px; font-family: inherit;
+      border: 1px solid var(--border); border-radius: 20px;
+      cursor: pointer; background: transparent; color: var(--muted);
+      transition: all .15s;
+    }
+    .ltab:hover { background: var(--bg); }
+    .ltab.on { background: var(--bg); border-color: var(--border2); color: var(--text); font-weight: 500; }
+
+    /* ── FORM ── */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media(max-width:480px){ .grid2 { grid-template-columns: 1fr; } }
+
+    .field { margin-bottom: 1rem; }
+    .field label { display: block; font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .field input {
+      width: 100%; padding: 11px 14px;
+      font-size: 16px; font-family: 'DM Mono', monospace;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg); color: var(--text);
+      transition: border-color .15s;
+    }
+    .field input:focus { outline: none; border-color: var(--border2); background: var(--surface); }
+    .field .hint { font-size: 11px; color: var(--hint); margin-top: 4px; }
+
+    .extra-toggle {
+      font-size: 12px; color: var(--muted); cursor: pointer;
+      margin-bottom: 1rem; display: inline-flex; align-items: center;
+      gap: 5px; border: none; background: none; padding: 0;
+      font-family: inherit;
+    }
+    .extra-toggle:hover { color: var(--text); }
+    .extra-section { border-top: 1px solid var(--border); padding-top: 1rem; margin-bottom: 1rem; }
+
+    .calc-btn {
+      width: 100%; padding: 13px;
+      font-size: 15px; font-weight: 600; font-family: inherit;
+      border: none; border-radius: var(--radius);
+      cursor: pointer; background: var(--accent); color: var(--accent-text);
+      transition: opacity .15s; letter-spacing: -0.2px;
+    }
+    .calc-btn:hover { opacity: .88; }
+
+    /* ── RESULTS ── */
+    .res { display: none; margin-top: 1.5rem; }
+    .res.show { display: block; }
+
+    .result-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 10px; margin-bottom: 1.25rem; }
+    .rc {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px;
+    }
+    .rc.primary { background: var(--accent); border-color: var(--accent); }
+    .rc .lbl { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 5px; }
+    .rc.primary .lbl { color: rgba(255,255,255,0.65); }
+    .rc .val { font-size: 20px; font-weight: 600; font-family: 'DM Mono', monospace; letter-spacing: -0.5px; color: var(--text); }
+    .rc.primary .val { color: #fff; }
+
+    /* bar */
+    .bar-section { margin-bottom: 1.25rem; }
+    .bar-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .bar-track { height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width .5s cubic-bezier(.4,0,.2,1); }
+    .bar-pct { display: flex; justify-content: space-between; font-size: 11px; color: var(--hint); margin-top: 5px; }
+
+    /* tip */
+    .tip {
+      background: var(--green-bg); border-left: 3px solid var(--green);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 10px 14px; font-size: 13px; color: #0a4a34;
+      line-height: 1.55; margin-bottom: 1.25rem;
+    }
+    .tip strong { font-weight: 600; }
+
+    /* biweekly */
+    .bw-box {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px; margin-bottom: 1.25rem;
+    }
+    .bw-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .bw-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 6px; }
+    .bw-row:last-child { margin-bottom: 0; }
+    .bw-row .k { color: var(--muted); }
+    .bw-row .v { font-family: 'DM Mono', monospace; font-weight: 500; color: var(--text); }
+    .bw-row .v.good { color: var(--green); }
+
+    /* payoff compare */
+    .section-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--hint); margin: 1.25rem 0 0.75rem; }
+
+    /* amortization */
+    .amort-wrap { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 8px 10px; color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 1px solid var(--border); }
+    td { padding: 8px 10px; border-bottom: 1px solid var(--border); font-family: 'DM Mono', monospace; }
+    tr:last-child td { border-bottom: none; }
+    .show-more-btn {
+      width: 100%; margin-top: 10px; padding: 8px;
+      font-size: 12px; font-family: inherit; color: var(--muted);
+      background: none; border: 1px solid var(--border);
+      border-radius: var(--radius); cursor: pointer;
+    }
+    .show-more-btn:hover { background: var(--bg); color: var(--text); }
+
+    /* ── FAQ ── */
+    .faq { margin-top: 2.5rem; }
+    .faq h2 { font-size: 18px; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.3px; }
+    .faq-item { border-top: 1px solid var(--border); padding: 1rem 0; }
+    .faq-item h3 { font-size: 14px; font-weight: 500; margin-bottom: 6px; cursor: pointer; display: flex; justify-content: space-between; }
+    .faq-item p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 12px;
+      color: var(--hint);
+      margin-top: 2rem;
+    }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
+  </style>
+  <meta name="geo.region" content="US" />
+  <meta name="geo.placename" content="United States" />
+  <meta name="language" content="en-US" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="alternate" hreflang="en-us" href="https://calqly.netlify.app/" />
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372985463894368" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+
+
+
+
+
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:99998;"></div>
+<div id="cookie-modal" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#ffffff;border-top:2px solid #e5e2dc;z-index:99999;font-family:'DM Sans',sans-serif;box-shadow:0 -8px 40px rgba(0,0,0,0.15);">
+  <div style="max-width:760px;margin:0 auto;padding:24px 20px 28px;">
+    <div style="font-size:17px;font-weight:600;color:#1a1916;margin-bottom:8px;">🍪 We use cookies</div>
+    <div style="font-size:13px;color:#6b6860;line-height:1.6;margin-bottom:18px;">
+      We and our partners (Google AdSense) use cookies to show personalized ads and improve your experience.
+      See our <a href="privacy.html" style="color:#0d6e4f;text-decoration:underline;">Privacy Policy</a> for details.
+    </div>
+    <div style="background:#f9f8f6;border:1px solid #e5e2dc;border-radius:10px;padding:16px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Strictly Necessary</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Required for the site to function</div></div>
+        <span style="background:#0d6e4f;color:#fff;font-size:11px;padding:3px 12px;border-radius:20px;font-weight:500;">Always on</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Advertising Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Google AdSense — personalized ads</div></div>
+        <div id="toggle-ads" onclick="ckToggle('ads')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-ads" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Analytics Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Anonymous usage statistics</div></div>
+        <div id="toggle-analytics" onclick="ckToggle('analytics')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-analytics" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="ckAcceptAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#1a1916;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Accept All</button>
+      <button onclick="ckSave()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#1a1916;border:1px solid #ccc9c0;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;">Save Preferences</button>
+      <button onclick="ckRejectAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#6b6860;border:1px solid #e5e2dc;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;">Reject All</button>
+    </div>
+    <div style="font-size:11px;color:#9e9b94;margin-top:12px;text-align:center;">Operated from Vienna, Austria (EU) · GDPR compliant</div>
+  </div>
+</div>
+<script>
+var _ck = {ads:true, analytics:true};
+function ckToggle(t){
+  _ck[t]=!_ck[t];
+  document.getElementById('toggle-'+t).style.background=_ck[t]?'#0d6e4f':'#ccc9c0';
+  document.getElementById('dot-'+t).style.left=_ck[t]?'23px':'3px';
+}
+function ckShow(){
+  document.getElementById('cookie-overlay').style.display='block';
+  document.getElementById('cookie-modal').style.display='block';
+}
+function ckHide(){
+  document.getElementById('cookie-overlay').style.display='none';
+  document.getElementById('cookie-modal').style.display='none';
+}
+function ckAcceptAll(){localStorage.setItem('ck_v2','accepted');ckHide();}
+function ckRejectAll(){localStorage.setItem('ck_v2','rejected');ckHide();}
+function ckSave(){localStorage.setItem('ck_v2','custom');localStorage.setItem('ck_ads',_ck.ads);localStorage.setItem('ck_analytics',_ck.analytics);ckHide();}
+// Always show on first visit — uses new key ck_v2 so old consent is ignored
+if(!localStorage.getItem('ck_v2')){setTimeout(ckShow,200);}
+</script>
+<header>
+  <div class="header-inner">
+    <div class="logo">Calqly <span>/ Loan</span></div>
+    <nav>
+      <a href="bmi.html">BMI</a>
+      <a href="interest.html">Interest</a>
+      <a href="percentage.html">Percentage</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page">
+<!-- ── HERO ── -->
+  <div class="hero">
+    <h1>Free Loan Calculator</h1>
+    <p>Estimate payments, check what you can afford, and plan your payoff — instantly.</p>
+  </div>
+
+  <!-- ── MAIN CALCULATOR CARD ── -->
+  <div class="card">
+
+    <!-- Mode tabs -->
+    <div class="mode-tabs">
+      <button class="mtab on" onclick="setMode('payment',this)">Monthly Payment</button>
+      <button class="mtab" onclick="setMode('afford',this)">How Much Can I Afford?</button>
+      <button class="mtab" onclick="setMode('payoff',this)">Early Payoff</button>
+    </div>
+
+    <!-- Loan type pills -->
+    <div class="ltype-row">
+      <button class="ltab on" onclick="setLType(this,6.5,36)">Personal</button>
+      <button class="ltab" onclick="setLType(this,7.2,60)">Auto</button>
+      <button class="ltab" onclick="setLType(this,6.8,360)">Mortgage</button>
+      <button class="ltab" onclick="setLType(this,5.5,120)">Student</button>
+    </div>
+
+    <!-- MODE: PAYMENT -->
+    <div id="mode-payment">
+      <div class="grid2">
+        <div class="field">
+          <label>Loan Amount ($)</label>
+          <input type="number" id="p-amt" value="25000" min="0" oninput="liveCalc()" />
+        </div>
+        <div class="field">
+          <label>Loan Term (months)</label>
+          <input type="number" id="p-mo" value="36" min="1" oninput="liveCalc()" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Annual Interest Rate (%)</label>
+        <input type="number" id="p-rate" value="6.5" step="0.1" min="0" oninput="liveCalc()" />
+      </div>
+      <button class="extra-toggle" onclick="toggleExtra()">
+        <span id="extra-arrow">▸</span> Add extra monthly payment (optional)
+      </button>
+      <div id="extra-section" class="extra-section" style="display:none;">
+        <div class="field">
+          <label>Extra Monthly Payment ($)</label>
+          <input type="number" id="p-extra" value="0" min="0" oninput="liveCalc()" />
+          <div class="hint">Even $50 extra/month can save you hundreds in interest</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODE: AFFORD -->
+    <div id="mode-afford" style="display:none;">
+      <div class="grid2">
+        <div class="field">
+          <label>Monthly Budget ($)</label>
+          <input type="number" id="a-pay" value="500" min="0" oninput="liveCalc()" />
+        </div>
+        <div class="field">
+          <label>Loan Term (months)</label>
+          <input type="number" id="a-mo" value="36" min="1" oninput="liveCalc()" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Annual Interest Rate (%)</label>
+        <input type="number" id="a-rate" value="6.5" step="0.1" min="0" oninput="liveCalc()" />
+      </div>
+    </div>
+
+    <!-- MODE: PAYOFF -->
+    <div id="mode-payoff" style="display:none;">
+      <div class="grid2">
+        <div class="field">
+          <label>Remaining Balance ($)</label>
+          <input type="number" id="o-bal" value="18000" min="0" oninput="liveCalc()" />
+        </div>
+        <div class="field">
+          <label>Remaining Months</label>
+          <input type="number" id="o-mo" value="48" min="1" oninput="liveCalc()" />
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label>Interest Rate (%)</label>
+          <input type="number" id="o-rate" value="6.5" step="0.1" min="0" oninput="liveCalc()" />
+        </div>
+        <div class="field">
+          <label>Extra Monthly Payment ($)</label>
+          <input type="number" id="o-extra" value="150" min="0" oninput="liveCalc()" />
+        </div>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="liveCalc()">Calculate</button>
+
+    <!-- RESULTS -->
+    <div class="res" id="main-res">
+      <div class="result-cards" id="res-cards"></div>
+      <div class="bar-section" id="bar-section" style="display:none;">
+        <div class="bar-labels"><span>Principal</span><span>Interest</span></div>
+        <div class="bar-track"><div class="bar-fill" id="bar-fill" style="width:50%"></div></div>
+        <div class="bar-pct" id="bar-pct"></div>
+      </div>
+      <div class="tip" id="tip-box" style="display:none;"></div>
+      <div id="bw-wrap" style="display:none;">
+        <div class="bw-box">
+          <div class="bw-title">💡 Bi-weekly payment strategy</div>
+          <div class="bw-row"><span class="k">Bi-weekly payment</span><span class="v" id="bw-pay">—</span></div>
+          <div class="bw-row"><span class="k">Months saved</span><span class="v good" id="bw-saved">—</span></div>
+          <div class="bw-row"><span class="k">Interest saved</span><span class="v good" id="bw-int">—</span></div>
+        </div>
+      </div>
+      <div id="payoff-compare" style="display:none;">
+        <div class="section-title">Comparison: with vs. without extra payment</div>
+        <div class="result-cards">
+          <div class="rc"><div class="lbl">Current payoff</div><div class="val" id="pc-cur">—</div></div>
+          <div class="rc primary"><div class="lbl">New payoff</div><div class="val" id="pc-new">—</div></div>
+          <div class="rc"><div class="lbl">Months saved</div><div class="val" id="pc-mo">—</div></div>
+          <div class="rc primary"><div class="lbl">Interest saved</div><div class="val" id="pc-saved">—</div></div>
+        </div>
+      </div>
+      <div class="amort-wrap" id="amort-wrap" style="display:none;">
+        <div class="section-title">Amortization schedule</div>
+        <table>
+          <thead><tr><th>Year</th><th>Principal paid</th><th>Interest paid</th><th>Balance left</th></tr></thead>
+          <tbody id="amort-body"></tbody>
+        </table>
+        <button class="show-more-btn" id="amort-toggle" onclick="toggleAmort()">Show full schedule ▾</button>
+      </div>
+    </div>
+  </div><!-- /card -->
+<!-- ── FAQ — great for SEO ── -->
+  <div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>How is my monthly loan payment calculated?</h3>
+      <p>Your monthly payment depends on three things: the loan amount (principal), the interest rate, and the loan term. The formula is called amortization — each payment covers interest first, then reduces your balance. Early payments are mostly interest; later payments are mostly principal.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What's the difference between interest rate and APR?</h3>
+      <p>The interest rate is the cost of borrowing the principal. APR (Annual Percentage Rate) includes the interest rate plus any fees (like origination fees), giving you the true annual cost of the loan. Always compare APRs when shopping for loans.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How much does an extra monthly payment save?</h3>
+      <p>It depends on your balance and rate, but even $50–$100 extra per month can save thousands in interest and cut years off your loan. Use the "Extra monthly payment" field above to see exactly how much you'd save.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is a bi-weekly payment strategy?</h3>
+      <p>Instead of making 12 monthly payments, you make 26 half-payments per year. This equals 13 full payments annually — one extra — which can shave months or even years off your loan without feeling a big budget difference.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What credit score do I need for a personal loan?</h3>
+      <p>Most lenders prefer a score of 670+ for good rates. Scores below 580 may qualify but with higher interest rates (20%+). Improving your score before applying can save thousands over the life of a loan.</p>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 Calqly — Free calculators, no sign-up required.</p>
+  <p style="margin-top:6px;">
+    <a href="index.html">Loan</a>
+    <a href="bmi.html">BMI</a>
+    <a href="interest.html">Interest</a>
+    <a href="percentage.html">Percentage</a>
+  </p>
+  <p style="margin-top:6px;">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="contact.html">Contact</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px;">Results are estimates for informational purposes only. Consult a qualified professional before making decisions.</p>
+</footer>
+
+<script>
+  let mode = 'payment', showFull = false, extraOpen = false;
+
+  function setMode(m, el) {
+    mode = m;
+    document.querySelectorAll('.mtab').forEach(t => t.classList.remove('on'));
+    el.classList.add('on');
+    ['mode-payment','mode-afford','mode-payoff'].forEach(id => document.getElementById(id).style.display = 'none');
+    document.getElementById('mode-' + m).style.display = 'block';
+    liveCalc();
+  }
+
+  function setLType(el, rate, mo) {
+    document.querySelectorAll('.ltab').forEach(t => t.classList.remove('on'));
+    el.classList.add('on');
+    const rateIds = { payment: 'p-rate', afford: 'a-rate', payoff: 'o-rate' };
+    const moIds   = { payment: 'p-mo',   afford: 'a-mo',   payoff: 'o-mo'   };
+    document.getElementById(rateIds[mode]).value = rate;
+    document.getElementById(moIds[mode]).value   = mo;
+    liveCalc();
+  }
+
+  function toggleExtra() {
+    extraOpen = !extraOpen;
+    document.getElementById('extra-section').style.display = extraOpen ? 'block' : 'none';
+    document.getElementById('extra-arrow').textContent = extraOpen ? '▾' : '▸';
+  }
+
+  const D = n => '$' + Math.round(n).toLocaleString('en-US');
+  const F = (n, d = 1) => n.toLocaleString('en-US', { maximumFractionDigits: d });
+
+  function monthlyPay(P, r, n) {
+    if (r === 0) return P / n;
+    return P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  function amortSim(P, r, pay, extra) {
+    let bal = P, totalInt = 0, months = 0, rows = [];
+    const eff = pay + (extra || 0);
+    while (bal > 0.01 && months < 600) {
+      const intCharge = bal * r;
+      const prinPay   = Math.min(eff - intCharge, bal);
+      totalInt += intCharge;
+      bal -= prinPay;
+      months++;
+      rows.push({ month: months, prin: prinPay, int: intCharge, bal: Math.max(bal, 0) });
+    }
+    return { months, totalInt, rows };
+  }
+
+  function buildAmort(rows) {
+    const yearly = [];
+    for (let y = 0; y < Math.ceil(rows.length / 12); y++) {
+      const chunk = rows.slice(y * 12, y * 12 + 12);
+      if (!chunk.length) break;
+      yearly.push({
+        yr:   y + 1,
+        prin: chunk.reduce((s, r) => s + r.prin, 0),
+        int:  chunk.reduce((s, r) => s + r.int,  0),
+        bal:  chunk[chunk.length - 1].bal
+      });
+    }
+    const show = showFull ? yearly : yearly.slice(0, 4);
+    document.getElementById('amort-body').innerHTML = show.map(r =>
+      `<tr><td>Year ${r.yr}</td><td>${D(r.prin)}</td><td>${D(r.int)}</td><td>${D(r.bal)}</td></tr>`
+    ).join('');
+    document.getElementById('amort-wrap').style.display = 'block';
+    const tog = document.getElementById('amort-toggle');
+    tog.style.display = yearly.length > 4 ? 'block' : 'none';
+    tog.textContent = showFull ? 'Show less ▴' : 'Show full schedule ▾';
+  }
+
+  function toggleAmort() { showFull = !showFull; liveCalc(); }
+
+  function liveCalc() {
+    const res = document.getElementById('main-res');
+    res.classList.add('show');
+
+    if (mode === 'payment') {
+      const P     = parseFloat(document.getElementById('p-amt').value)   || 0;
+      const n     = parseInt(document.getElementById('p-mo').value)      || 1;
+      const ann   = parseFloat(document.getElementById('p-rate').value)  || 0;
+      const extra = parseFloat(document.getElementById('p-extra')?.value) || 0;
+      const r     = ann / 100 / 12;
+      const pay   = monthlyPay(P, r, n);
+      const { months: nm, totalInt: ti, rows } = amortSim(P, r, pay, extra);
+      const totalNorm = pay * n;
+      const intNorm   = totalNorm - P;
+
+      document.getElementById('res-cards').innerHTML = `
+        <div class="rc primary"><div class="lbl">Monthly payment</div><div class="val">${D(pay)}</div></div>
+        <div class="rc"><div class="lbl">Total repaid</div><div class="val">${D(extra ? pay * nm + extra * nm : totalNorm)}</div></div>
+        <div class="rc"><div class="lbl">Total interest</div><div class="val">${D(extra ? ti : intNorm)}</div></div>
+        <div class="rc"><div class="lbl">Payoff in</div><div class="val">${extra ? nm : n} mo</div></div>
+      `;
+
+      const intShow = extra ? ti : intNorm;
+      const pct = Math.round(P / (extra ? pay * nm + extra * nm : totalNorm) * 100);
+      document.getElementById('bar-fill').style.width = pct + '%';
+      document.getElementById('bar-pct').innerHTML = `<span>${pct}% principal (${D(P)})</span><span>${100 - pct}% interest (${D(intShow)})</span>`;
+      document.getElementById('bar-section').style.display = 'block';
+
+      document.getElementById('tip-box').innerHTML = extra
+        ? `<strong>Nice!</strong> With your extra ${D(extra)}/mo you'll save <strong>${D(intNorm - ti)}</strong> in interest and pay off <strong>${n - nm} months early.</strong>`
+        : `<strong>Tip:</strong> You'll pay <strong>${D(intNorm)}</strong> in interest total. Adding just <strong>$100/mo extra</strong> could save you hundreds and shorten your loan.`;
+      document.getElementById('tip-box').style.display = 'block';
+
+      const bwPay = pay / 2;
+      const { months: bwMo, totalInt: bwInt } = amortSim(P, r, bwPay * 2, 0);
+      document.getElementById('bw-pay').textContent  = D(bwPay) + ' / 2 weeks';
+      document.getElementById('bw-saved').textContent = (n - bwMo) + ' months';
+      document.getElementById('bw-int').textContent   = D(intNorm - bwInt);
+      document.getElementById('bw-wrap').style.display = 'block';
+      document.getElementById('payoff-compare').style.display = 'none';
+      buildAmort(rows);
+
+    } else if (mode === 'afford') {
+      const pay = parseFloat(document.getElementById('a-pay').value) || 0;
+      const n   = parseInt(document.getElementById('a-mo').value)    || 1;
+      const ann = parseFloat(document.getElementById('a-rate').value) || 0;
+      const r   = ann / 100 / 12;
+      const maxLoan = r === 0 ? pay * n : pay * (1 - Math.pow(1 + r, -n)) / r;
+      const intTotal = pay * n - maxLoan;
+
+      document.getElementById('res-cards').innerHTML = `
+        <div class="rc primary"><div class="lbl">Max loan you can afford</div><div class="val">${D(maxLoan)}</div></div>
+        <div class="rc"><div class="lbl">Your monthly payment</div><div class="val">${D(pay)}</div></div>
+        <div class="rc"><div class="lbl">Total interest</div><div class="val">${D(Math.max(intTotal, 0))}</div></div>
+        <div class="rc"><div class="lbl">Total repaid</div><div class="val">${D(pay * n)}</div></div>
+      `;
+      document.getElementById('tip-box').innerHTML = `<strong>Affordability check:</strong> With a budget of <strong>${D(pay)}/month</strong> at ${ann}% over ${n} months, you can borrow up to <strong>${D(maxLoan)}</strong>.`;
+      document.getElementById('tip-box').style.display = 'block';
+      document.getElementById('bar-section').style.display = 'none';
+      document.getElementById('bw-wrap').style.display = 'none';
+      document.getElementById('payoff-compare').style.display = 'none';
+      document.getElementById('amort-wrap').style.display = 'none';
+
+    } else if (mode === 'payoff') {
+      const P     = parseFloat(document.getElementById('o-bal').value)   || 0;
+      const n     = parseInt(document.getElementById('o-mo').value)      || 1;
+      const ann   = parseFloat(document.getElementById('o-rate').value)  || 0;
+      const extra = parseFloat(document.getElementById('o-extra').value) || 0;
+      const r     = ann / 100 / 12;
+      const pay   = monthlyPay(P, r, n);
+      const { months: nm, totalInt: ti, rows } = amortSim(P, r, pay, extra);
+      const { totalInt: tiNorm } = amortSim(P, r, pay, 0);
+
+      document.getElementById('res-cards').innerHTML = `
+        <div class="rc"><div class="lbl">Current payment</div><div class="val">${D(pay)}</div></div>
+        <div class="rc primary"><div class="lbl">New payment</div><div class="val">${D(pay + extra)}</div></div>
+      `;
+      document.getElementById('pc-cur').textContent   = n + ' mo';
+      document.getElementById('pc-new').textContent   = nm + ' mo';
+      document.getElementById('pc-mo').textContent    = (n - nm) + ' mo';
+      document.getElementById('pc-saved').textContent = D(tiNorm - ti);
+      document.getElementById('payoff-compare').style.display = 'block';
+      document.getElementById('tip-box').innerHTML = `<strong>Great move!</strong> Paying an extra <strong>${D(extra)}/month</strong> saves you <strong>${D(tiNorm - ti)}</strong> in interest and gets you debt-free <strong>${n - nm} months sooner.</strong>`;
+      document.getElementById('tip-box').style.display = 'block';
+      document.getElementById('bar-section').style.display = 'none';
+      document.getElementById('bw-wrap').style.display = 'none';
+      buildAmort(rows);
+    }
+  }
+
+  liveCalc();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Calqly Loan Calculator","url":"https://calqly.netlify.app/","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free loan calculator for Americans. Calculate monthly payments, mortgage, auto, personal and student loans.","areaServed":{"@type":"Country","name":"United States"}}
+</script>
+
+
+</body>
+</html>

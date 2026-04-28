@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Calqly</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#f9f8f6;--surface:#fff;--border:#e5e2dc;--text:#1a1916;--muted:#6b6860;--hint:#9e9b94;--radius:10px;--radius-lg:14px;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+    header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;}
+    .header-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+    .logo{font-size:16px;font-weight:600;text-decoration:none;color:var(--text);}
+    .logo span{color:var(--muted);font-weight:400;}
+    nav{display:flex;gap:20px;}
+    nav a{font-size:13px;color:var(--muted);text-decoration:none;}
+    nav a:hover{color:var(--text);}
+    .page{max-width:760px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;margin-bottom:1.25rem;}
+    h1{font-size:24px;font-weight:600;margin-bottom:6px;letter-spacing:-0.4px;}
+    .updated{font-size:13px;color:var(--hint);margin-bottom:2rem;}
+    h2{font-size:16px;font-weight:600;margin:1.75rem 0 0.6rem;}
+    p{font-size:14px;color:var(--muted);margin-bottom:0.75rem;}
+    ul{padding-left:1.25rem;margin-bottom:0.75rem;}
+    li{font-size:14px;color:var(--muted);margin-bottom:4px;}
+    a{color:#0d6e4f;}
+    footer{border-top:1px solid var(--border);background:var(--surface);padding:1.5rem;text-align:center;font-size:12px;color:var(--hint);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+  </style>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372985463894368" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:99998;"></div>
+<div id="cookie-modal" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#ffffff;border-top:2px solid #e5e2dc;z-index:99999;font-family:'DM Sans',sans-serif;box-shadow:0 -8px 40px rgba(0,0,0,0.15);">
+  <div style="max-width:760px;margin:0 auto;padding:24px 20px 28px;">
+    <div style="font-size:17px;font-weight:600;color:#1a1916;margin-bottom:8px;">🍪 We use cookies</div>
+    <div style="font-size:13px;color:#6b6860;line-height:1.6;margin-bottom:18px;">
+      We and our partners (Google AdSense) use cookies to show personalized ads and improve your experience.
+      See our <a href="privacy.html" style="color:#0d6e4f;text-decoration:underline;">Privacy Policy</a> for details.
+    </div>
+    <div style="background:#f9f8f6;border:1px solid #e5e2dc;border-radius:10px;padding:16px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Strictly Necessary</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Required for the site to function</div></div>
+        <span style="background:#0d6e4f;color:#fff;font-size:11px;padding:3px 12px;border-radius:20px;font-weight:500;">Always on</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Advertising Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Google AdSense — personalized ads</div></div>
+        <div id="toggle-ads" onclick="ckToggle('ads')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-ads" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Analytics Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Anonymous usage statistics</div></div>
+        <div id="toggle-analytics" onclick="ckToggle('analytics')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-analytics" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="ckAcceptAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#1a1916;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Accept All</button>
+      <button onclick="ckSave()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#1a1916;border:1px solid #ccc9c0;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;">Save Preferences</button>
+      <button onclick="ckRejectAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#6b6860;border:1px solid #e5e2dc;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;">Reject All</button>
+    </div>
+    <div style="font-size:11px;color:#9e9b94;margin-top:12px;text-align:center;">Operated from Vienna, Austria (EU) · GDPR compliant</div>
+  </div>
+</div>
+<script>
+var _ck = {ads:true, analytics:true};
+function ckToggle(t){
+  _ck[t]=!_ck[t];
+  document.getElementById('toggle-'+t).style.background=_ck[t]?'#0d6e4f':'#ccc9c0';
+  document.getElementById('dot-'+t).style.left=_ck[t]?'23px':'3px';
+}
+function ckShow(){
+  document.getElementById('cookie-overlay').style.display='block';
+  document.getElementById('cookie-modal').style.display='block';
+}
+function ckHide(){
+  document.getElementById('cookie-overlay').style.display='none';
+  document.getElementById('cookie-modal').style.display='none';
+}
+function ckAcceptAll(){localStorage.setItem('ck_v2','accepted');ckHide();}
+function ckRejectAll(){localStorage.setItem('ck_v2','rejected');ckHide();}
+function ckSave(){localStorage.setItem('ck_v2','custom');localStorage.setItem('ck_ads',_ck.ads);localStorage.setItem('ck_analytics',_ck.analytics);ckHide();}
+// Always show on first visit — uses new key ck_v2 so old consent is ignored
+if(!localStorage.getItem('ck_v2')){setTimeout(ckShow,200);}
+</script>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">Calqly <span>/ Privacy Policy</span></a>
+    <nav>
+      <a href="index.html">Loan</a>
+      <a href="bmi.html">BMI</a>
+      <a href="interest.html">Interest</a>
+      <a href="percentage.html">Percentage</a>
+    </nav>
+  </div>
+</header>
+<div class="page">
+  <div class="card">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: April 28, 2026</p>
+
+    <p>This Privacy Policy explains how Calqly ("we", "us", or "our") collects, uses, and protects information when you visit <strong>calqly.netlify.app</strong> (the "Website"). This website is operated by a private individual based in Vienna, Austria, and is subject to the EU General Data Protection Regulation (GDPR) as well as Austrian data protection law.</p>
+
+    <h2>1. Who We Are</h2>
+    <p>Calqly is a free utility website offering financial and health calculators. It is operated as a private, non-commercial side project. Contact: <a href="mailto:veriqae@gmail.com">veriqae@gmail.com</a></p>
+
+    <h2>2. What Data We Collect</h2>
+    <p>We do <strong>not</strong> collect personal data directly. We do not have user accounts, registration forms, or databases. However, third-party services used on this website may collect data:</p>
+    <ul>
+      <li><strong>Google AdSense:</strong> Displays advertisements and may use cookies to show personalized ads based on your browsing behavior.</li>
+      <li><strong>Google Analytics</strong> (if enabled): Collects anonymized usage data such as page views, device type, and general location.</li>
+      <li><strong>Netlify (hosting):</strong> May collect standard server logs including IP addresses for security purposes.</li>
+    </ul>
+
+    <h2>3. Cookies</h2>
+    <p>This website uses cookies primarily through Google AdSense. Cookies are small text files stored on your device. You will be asked for consent when you first visit the site. You can withdraw consent at any time by clearing your browser cookies.</p>
+    <p>Types of cookies used:</p>
+    <ul>
+      <li><strong>Strictly necessary cookies:</strong> Store your cookie consent preference.</li>
+      <li><strong>Advertising cookies:</strong> Set by Google AdSense to deliver relevant advertisements.</li>
+    </ul>
+
+    <h2>4. Legal Basis for Processing (GDPR)</h2>
+    <p>We process data based on:</p>
+    <ul>
+      <li><strong>Consent (Art. 6(1)(a) GDPR):</strong> For advertising cookies — only after you accept the cookie banner.</li>
+      <li><strong>Legitimate interests (Art. 6(1)(f) GDPR):</strong> For basic server logs necessary for website security.</li>
+    </ul>
+
+    <h2>5. Google AdSense & Advertising</h2>
+    <p>We use Google AdSense to display ads. Google may use cookies to show you ads based on your interests. You can opt out of personalized advertising at <a href="https://adssettings.google.com" target="_blank">adssettings.google.com</a>. For more information, see <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</p>
+
+    <h2>6. Data Transfers Outside the EU</h2>
+    <p>Google AdSense may transfer data to servers in the United States. Google LLC is certified under the EU-U.S. Data Privacy Framework, ensuring an adequate level of data protection.</p>
+
+    <h2>7. Your Rights (GDPR)</h2>
+    <p>As an EU resident, you have the right to: access your data, correct inaccurate data, request deletion, object to processing, and lodge a complaint with the Austrian Data Protection Authority (Datenschutzbehörde, <a href="https://www.dsb.gv.at" target="_blank">dsb.gv.at</a>).</p>
+    <p>To exercise these rights, contact: <a href="mailto:veriqae@gmail.com">veriqae@gmail.com</a></p>
+
+    <h2>8. Children's Privacy</h2>
+    <p>This website is intended for users aged 18 and older. We do not knowingly collect data from children under 13. If you believe a child has provided personal information, please contact us immediately.</p>
+
+    <h2>9. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy occasionally. Changes will be posted on this page with an updated date. Continued use of the website constitutes acceptance of the updated policy.</p>
+
+    <h2>10. Contact</h2>
+    <p>For any privacy-related questions: <a href="mailto:veriqae@gmail.com">veriqae@gmail.com</a></p>
+  </div>
+</div>
+<footer>
+  <p>© 2026 Calqly — Free calculators, no sign-up required.</p>
+  <p style="margin-top:6px;">
+    <a href="index.html">Loan</a>
+    <a href="bmi.html">BMI</a>
+    <a href="interest.html">Interest</a>
+    <a href="percentage.html">Percentage</a>
+  </p>
+  <p style="margin-top:6px;">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="contact.html">Contact</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px;">Results are estimates for informational purposes only. Consult a qualified professional before making decisions.</p>
+</footer>
+
+
+</body>
+</html>

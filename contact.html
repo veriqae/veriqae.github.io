@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Calqly</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#f9f8f6;--surface:#fff;--border:#e5e2dc;--text:#1a1916;--muted:#6b6860;--hint:#9e9b94;--green:#0d6e4f;--green-bg:#edf7f3;--radius:10px;--radius-lg:14px;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+    header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;}
+    .header-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+    .logo{font-size:16px;font-weight:600;text-decoration:none;color:var(--text);}
+    .logo span{color:var(--muted);font-weight:400;}
+    nav{display:flex;gap:20px;}
+    nav a{font-size:13px;color:var(--muted);text-decoration:none;}
+    nav a:hover{color:var(--text);}
+    .page{max-width:580px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+    .hero{margin-bottom:2rem;}
+    .hero h1{font-size:26px;font-weight:600;margin-bottom:6px;letter-spacing:-0.4px;}
+    .hero p{font-size:14px;color:var(--muted);}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:1rem;}
+    .info-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);}
+    .info-row:last-child{border-bottom:none;padding-bottom:0;}
+    .info-icon{width:36px;height:36px;border-radius:var(--radius);background:var(--green-bg);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+    .info-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.4px;color:var(--hint);margin-bottom:3px;}
+    .info-val{font-size:14px;color:var(--text);}
+    .info-val a{color:var(--green);text-decoration:none;}
+    .info-val a:hover{text-decoration:underline;}
+    .notice{background:var(--green-bg);border-left:3px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;font-size:13px;color:#0a4a34;line-height:1.55;margin-top:1rem;}
+    footer{border-top:1px solid var(--border);background:var(--surface);padding:1.5rem;text-align:center;font-size:12px;color:var(--hint);margin-top:2rem;}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+  </style>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372985463894368" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:99998;"></div>
+<div id="cookie-modal" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#ffffff;border-top:2px solid #e5e2dc;z-index:99999;font-family:'DM Sans',sans-serif;box-shadow:0 -8px 40px rgba(0,0,0,0.15);">
+  <div style="max-width:760px;margin:0 auto;padding:24px 20px 28px;">
+    <div style="font-size:17px;font-weight:600;color:#1a1916;margin-bottom:8px;">🍪 We use cookies</div>
+    <div style="font-size:13px;color:#6b6860;line-height:1.6;margin-bottom:18px;">
+      We and our partners (Google AdSense) use cookies to show personalized ads and improve your experience.
+      See our <a href="privacy.html" style="color:#0d6e4f;text-decoration:underline;">Privacy Policy</a> for details.
+    </div>
+    <div style="background:#f9f8f6;border:1px solid #e5e2dc;border-radius:10px;padding:16px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Strictly Necessary</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Required for the site to function</div></div>
+        <span style="background:#0d6e4f;color:#fff;font-size:11px;padding:3px 12px;border-radius:20px;font-weight:500;">Always on</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Advertising Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Google AdSense — personalized ads</div></div>
+        <div id="toggle-ads" onclick="ckToggle('ads')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-ads" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Analytics Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Anonymous usage statistics</div></div>
+        <div id="toggle-analytics" onclick="ckToggle('analytics')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-analytics" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="ckAcceptAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#1a1916;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Accept All</button>
+      <button onclick="ckSave()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#1a1916;border:1px solid #ccc9c0;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;">Save Preferences</button>
+      <button onclick="ckRejectAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#6b6860;border:1px solid #e5e2dc;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;">Reject All</button>
+    </div>
+    <div style="font-size:11px;color:#9e9b94;margin-top:12px;text-align:center;">Operated from Vienna, Austria (EU) · GDPR compliant</div>
+  </div>
+</div>
+<script>
+var _ck = {ads:true, analytics:true};
+function ckToggle(t){
+  _ck[t]=!_ck[t];
+  document.getElementById('toggle-'+t).style.background=_ck[t]?'#0d6e4f':'#ccc9c0';
+  document.getElementById('dot-'+t).style.left=_ck[t]?'23px':'3px';
+}
+function ckShow(){
+  document.getElementById('cookie-overlay').style.display='block';
+  document.getElementById('cookie-modal').style.display='block';
+}
+function ckHide(){
+  document.getElementById('cookie-overlay').style.display='none';
+  document.getElementById('cookie-modal').style.display='none';
+}
+function ckAcceptAll(){localStorage.setItem('ck_v2','accepted');ckHide();}
+function ckRejectAll(){localStorage.setItem('ck_v2','rejected');ckHide();}
+function ckSave(){localStorage.setItem('ck_v2','custom');localStorage.setItem('ck_ads',_ck.ads);localStorage.setItem('ck_analytics',_ck.analytics);ckHide();}
+// Always show on first visit — uses new key ck_v2 so old consent is ignored
+if(!localStorage.getItem('ck_v2')){setTimeout(ckShow,200);}
+</script>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">Calqly <span>/ Contact</span></a>
+    <nav>
+      <a href="index.html">Loan</a>
+      <a href="bmi.html">BMI</a>
+      <a href="interest.html">Interest</a>
+      <a href="percentage.html">Percentage</a>
+    </nav>
+  </div>
+</header>
+<div class="page">
+  <div class="hero">
+    <h1>Contact</h1>
+    <p>Questions, feedback, or a bug to report? We'd love to hear from you.</p>
+  </div>
+  <div class="card">
+    <div class="info-row">
+      <div class="info-icon">✉️</div>
+      <div>
+        <div class="info-label">Email</div>
+        <div class="info-val"><a href="mailto:veriqae@gmail.com">veriqae@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">📍</div>
+      <div>
+        <div class="info-label">Location</div>
+        <div class="info-val">Vienna, Austria (EU)</div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">⏱</div>
+      <div>
+        <div class="info-label">Response time</div>
+        <div class="info-val">Usually within 2–3 business days</div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">🔒</div>
+      <div>
+        <div class="info-label">Privacy requests (GDPR)</div>
+        <div class="info-val"><a href="mailto:veriqae@gmail.com">veriqae@gmail.com</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="notice">
+    <strong>Please note:</strong> Calqly is a free tool operated by a private individual. We are unable to provide personalized financial or medical advice. For financial decisions, please consult a licensed advisor. For health questions, please speak with your doctor.
+  </div>
+</div>
+<footer>
+  <p>© 2026 Calqly — Free calculators, no sign-up required.</p>
+  <p style="margin-top:6px;">
+    <a href="index.html">Loan</a>
+    <a href="bmi.html">BMI</a>
+    <a href="interest.html">Interest</a>
+    <a href="percentage.html">Percentage</a>
+  </p>
+  <p style="margin-top:6px;">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="contact.html">Contact</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px;">Results are estimates for informational purposes only. Consult a qualified professional before making decisions.</p>
+</footer>
+
+
+</body>
+</html>

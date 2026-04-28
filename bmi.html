@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free BMI Calculator USA — Body Mass Index by Age & Gender | Calqly</title>
+  <meta name="description" content="Free BMI calculator for adults 18+. Includes age, gender, healthy weight range, personalized tips to lose or gain weight. Based on CDC guidelines." />
+  <meta name="geo.region" content="US" />
+  <meta name="language" content="en-US" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#f9f8f6;--surface:#ffffff;--border:#e5e2dc;--border2:#ccc9c0;--text:#1a1916;--muted:#6b6860;--hint:#9e9b94;--accent:#1a1916;--accent-text:#ffffff;--green:#0d6e4f;--green-bg:#edf7f3;--radius:10px;--radius-lg:14px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6;}
+    header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;}
+    .header-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+    .logo{font-size:16px;font-weight:600;letter-spacing:-0.3px;text-decoration:none;color:var(--text);}
+    .logo span{color:var(--muted);font-weight:400;}
+    nav{display:flex;gap:20px;}
+    nav a{font-size:13px;color:var(--muted);text-decoration:none;}
+    nav a:hover{color:var(--text);}
+    nav a.active{color:var(--text);font-weight:500;}
+    .page{max-width:760px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+    .ad-slot{background:var(--surface);border:1px dashed var(--border2);border-radius:var(--radius);text-align:center;padding:1.5rem;color:var(--hint);font-size:12px;margin-bottom:1.5rem;min-height:90px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;}
+    .hero{margin-bottom:2rem;}
+    .hero h1{font-size:clamp(22px,4vw,30px);font-weight:600;letter-spacing:-0.5px;margin-bottom:6px;}
+    .hero p{color:var(--muted);font-size:14px;}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.25rem;}
+    .toggle-row{display:flex;gap:6px;margin-bottom:1.25rem;}
+    .ttab{padding:8px 18px;font-size:13px;font-family:inherit;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:transparent;color:var(--muted);transition:all .15s;flex:1;text-align:center;}
+    .ttab:hover{background:var(--bg);}
+    .ttab.on{background:var(--accent);color:var(--accent-text);border-color:var(--accent);}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media(max-width:500px){.grid2{grid-template-columns:1fr;}}
+    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+    @media(max-width:500px){.grid3{grid-template-columns:1fr;}}
+    .field{margin-bottom:1rem;}
+    .field label{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.4px;}
+    .field input,.field select{width:100%;padding:11px 14px;font-size:15px;font-family:'DM Mono',monospace;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);transition:border-color .15s;-webkit-appearance:none;}
+    .field select{font-family:'DM Sans',sans-serif;cursor:pointer;}
+    .field input:focus,.field select:focus{outline:none;border-color:var(--border2);background:var(--surface);}
+    .field .hint{font-size:11px;color:var(--hint);margin-top:4px;}
+    .age-warning{background:#faeeda;border:1px solid #FAC775;border-radius:var(--radius);padding:10px 14px;font-size:13px;color:#633806;margin-bottom:1rem;display:none;}
+    .calc-btn{width:100%;padding:13px;font-size:15px;font-weight:600;font-family:inherit;border:none;border-radius:var(--radius);cursor:pointer;background:var(--accent);color:var(--accent-text);transition:opacity .15s;}
+    .calc-btn:hover{opacity:.88;}
+    .calc-btn:disabled{opacity:.4;cursor:not-allowed;}
+    .res{display:none;margin-top:1.5rem;}
+    .res.show{display:block;}
+    .result-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:1.25rem;}
+    .rc{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
+    .rc.primary{background:var(--accent);border-color:var(--accent);}
+    .rc .lbl{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:5px;}
+    .rc.primary .lbl{color:rgba(255,255,255,0.65);}
+    .rc .val{font-size:19px;font-weight:600;font-family:'DM Mono',monospace;color:var(--text);}
+    .rc.primary .val{color:#fff;}
+    .rc .val.sm{font-size:14px;padding-top:2px;}
+    .bmi-bar-wrap{margin-bottom:1.25rem;}
+    .bmi-bar{height:9px;border-radius:5px;background:linear-gradient(to right,#5DCAA5 0%,#97C459 30%,#EF9F27 60%,#E24B4A 80%,#A32D2D 100%);position:relative;margin:.5rem 0 .5rem;}
+    .bmi-marker{width:16px;height:16px;border-radius:50%;background:var(--text);border:2px solid var(--surface);position:absolute;top:-4px;transform:translateX(-50%);transition:left .5s cubic-bezier(.4,0,.2,1);}
+    .bmi-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);}
+    .tip-box{border-radius:var(--radius);padding:14px 16px;font-size:13px;line-height:1.6;margin-bottom:1.25rem;border-left:3px solid;}
+    .tip-box.underweight{background:#E6F1FB;border-color:#378ADD;color:#0C447C;}
+    .tip-box.normal{background:var(--green-bg);border-color:var(--green);color:#0a4a34;}
+    .tip-box.overweight{background:#faeeda;border-color:#EF9F27;color:#633806;}
+    .tip-box.obese{background:#FCEBEB;border-color:#E24B4A;color:#791F1F;}
+    .tip-box strong{font-weight:600;}
+    .tips-section{margin-top:1.25rem;}
+    .tips-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.4px;}
+    .tip-item{display:flex;gap:10px;margin-bottom:10px;font-size:13px;color:var(--muted);line-height:1.5;align-items:flex-start;}
+    .tip-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px;}
+    .tip-icon.green{background:var(--green-bg);color:var(--green);}
+    .tip-icon.blue{background:#E6F1FB;color:#185FA5;}
+    .tip-icon.amber{background:#faeeda;color:#854F0B;}
+    .motivation{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-top:1rem;font-size:13px;color:var(--muted);line-height:1.6;font-style:italic;}
+    .motivation strong{color:var(--text);font-style:normal;display:block;margin-bottom:4px;font-size:12px;text-transform:uppercase;letter-spacing:0.4px;}
+    .faq{margin-top:2.5rem;}
+    .faq h2{font-size:18px;font-weight:600;margin-bottom:1rem;letter-spacing:-0.3px;}
+    .faq-item{border-top:1px solid var(--border);padding:1rem 0;}
+    .faq-item h3{font-size:14px;font-weight:500;margin-bottom:6px;}
+    .faq-item p{font-size:13px;color:var(--muted);line-height:1.65;}
+    footer{border-top:1px solid var(--border);background:var(--surface);padding:1.5rem;text-align:center;font-size:12px;color:var(--hint);margin-top:2rem;}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+  </style>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372985463894368" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+
+
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:99998;"></div>
+<div id="cookie-modal" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#ffffff;border-top:2px solid #e5e2dc;z-index:99999;font-family:'DM Sans',sans-serif;box-shadow:0 -8px 40px rgba(0,0,0,0.15);">
+  <div style="max-width:760px;margin:0 auto;padding:24px 20px 28px;">
+    <div style="font-size:17px;font-weight:600;color:#1a1916;margin-bottom:8px;">🍪 We use cookies</div>
+    <div style="font-size:13px;color:#6b6860;line-height:1.6;margin-bottom:18px;">
+      We and our partners (Google AdSense) use cookies to show personalized ads and improve your experience.
+      See our <a href="privacy.html" style="color:#0d6e4f;text-decoration:underline;">Privacy Policy</a> for details.
+    </div>
+    <div style="background:#f9f8f6;border:1px solid #e5e2dc;border-radius:10px;padding:16px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Strictly Necessary</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Required for the site to function</div></div>
+        <span style="background:#0d6e4f;color:#fff;font-size:11px;padding:3px 12px;border-radius:20px;font-weight:500;">Always on</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e5e2dc;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Advertising Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Google AdSense — personalized ads</div></div>
+        <div id="toggle-ads" onclick="ckToggle('ads')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-ads" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div><div style="font-size:13px;font-weight:600;color:#1a1916;">Analytics Cookies</div><div style="font-size:12px;color:#9e9b94;margin-top:2px;">Anonymous usage statistics</div></div>
+        <div id="toggle-analytics" onclick="ckToggle('analytics')" style="width:46px;height:26px;background:#0d6e4f;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;">
+          <div id="dot-analytics" style="position:absolute;top:3px;left:23px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .2s;"></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="ckAcceptAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#1a1916;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Accept All</button>
+      <button onclick="ckSave()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#1a1916;border:1px solid #ccc9c0;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;">Save Preferences</button>
+      <button onclick="ckRejectAll()" style="flex:1;min-width:130px;padding:13px 20px;background:#fff;color:#6b6860;border:1px solid #e5e2dc;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;">Reject All</button>
+    </div>
+    <div style="font-size:11px;color:#9e9b94;margin-top:12px;text-align:center;">Operated from Vienna, Austria (EU) · GDPR compliant</div>
+  </div>
+</div>
+<script>
+var _ck = {ads:true, analytics:true};
+function ckToggle(t){
+  _ck[t]=!_ck[t];
+  document.getElementById('toggle-'+t).style.background=_ck[t]?'#0d6e4f':'#ccc9c0';
+  document.getElementById('dot-'+t).style.left=_ck[t]?'23px':'3px';
+}
+function ckShow(){
+  document.getElementById('cookie-overlay').style.display='block';
+  document.getElementById('cookie-modal').style.display='block';
+}
+function ckHide(){
+  document.getElementById('cookie-overlay').style.display='none';
+  document.getElementById('cookie-modal').style.display='none';
+}
+function ckAcceptAll(){localStorage.setItem('ck_v2','accepted');ckHide();}
+function ckRejectAll(){localStorage.setItem('ck_v2','rejected');ckHide();}
+function ckSave(){localStorage.setItem('ck_v2','custom');localStorage.setItem('ck_ads',_ck.ads);localStorage.setItem('ck_analytics',_ck.analytics);ckHide();}
+// Always show on first visit — uses new key ck_v2 so old consent is ignored
+if(!localStorage.getItem('ck_v2')){setTimeout(ckShow,200);}
+</script>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">Calqly <span>/ BMI</span></a>
+    <nav>
+      <a href="index.html">Loan</a>
+      <a href="bmi.html" class="active">BMI</a>
+      <a href="interest.html">Interest</a>
+      <a href="percentage.html">Percentage</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page">
+<div class="hero">
+    <h1>Free BMI Calculator</h1>
+    <p>Body Mass Index for adults 18+ — includes personalized tips based on your age and gender.</p>
+  </div>
+
+  <div class="card">
+    <!-- Unit toggle -->
+    <div class="toggle-row">
+      <button class="ttab on" onclick="setUnit('us',this)">US (lbs / inches)</button>
+      <button class="ttab" onclick="setUnit('metric',this)">Metric (kg / cm)</button>
+    </div>
+
+    <!-- Gender -->
+    <div class="field">
+      <label>Gender</label>
+      <div class="toggle-row" style="margin-bottom:0;">
+        <button class="ttab on" id="g-male" onclick="setGender('male',this)">Male</button>
+        <button class="ttab" id="g-female" onclick="setGender('female',this)">Female</button>
+      </div>
+    </div>
+
+    <!-- Age -->
+    <div class="field" style="margin-top:1rem;">
+      <label>Age</label>
+      <input type="number" id="age" value="30" min="18" max="100" oninput="checkAge()" placeholder="Enter your age" />
+      <div class="hint">This calculator is for adults aged 18 and older</div>
+    </div>
+    <div class="age-warning" id="age-warn">
+      ⚠ BMI for children and teenagers (under 18) requires a different calculation method. Please consult your pediatrician.
+    </div>
+
+    <!-- US fields -->
+    <div id="us-fields">
+      <div class="grid2">
+        <div class="field"><label>Height (ft)</label><input type="number" id="ft" value="5" min="1" max="8" oninput="liveCalc()"></div>
+        <div class="field"><label>Height (in)</label><input type="number" id="inch" value="9" min="0" max="11" oninput="liveCalc()"></div>
+      </div>
+      <div class="field"><label>Weight (lbs)</label><input type="number" id="lbs" value="160" min="50" max="700" oninput="liveCalc()"></div>
+    </div>
+
+    <!-- Metric fields -->
+    <div id="metric-fields" style="display:none;">
+      <div class="field"><label>Height (cm)</label><input type="number" id="cm" value="175" min="100" max="250" oninput="liveCalc()"></div>
+      <div class="field"><label>Weight (kg)</label><input type="number" id="kg" value="70" min="20" max="300" oninput="liveCalc()"></div>
+    </div>
+
+    <button class="calc-btn" id="calc-btn" onclick="liveCalc()">Calculate BMI</button>
+
+    <!-- Results -->
+    <div class="res" id="main-res">
+      <div class="result-cards">
+        <div class="rc primary"><div class="lbl">Your BMI</div><div class="val" id="r-bmi">—</div></div>
+        <div class="rc"><div class="lbl">Category</div><div class="val sm" id="r-cat">—</div></div>
+        <div class="rc"><div class="lbl">Healthy range</div><div class="val sm" id="r-range">—</div></div>
+        <div class="rc"><div class="lbl">Weight to goal</div><div class="val sm" id="r-diff">—</div></div>
+      </div>
+
+      <div class="bmi-bar-wrap">
+        <div class="bmi-bar"><div class="bmi-marker" id="bmi-dot" style="left:2%"></div></div>
+        <div class="bmi-labels"><span>Underweight<br>&lt;18.5</span><span>Normal<br>18.5–24.9</span><span>Overweight<br>25–29.9</span><span>Obese<br>30+</span></div>
+      </div>
+
+      <div class="tip-box" id="tip-box"></div>
+
+      <div class="tips-section" id="tips-section"></div>
+
+      <div class="motivation" id="motivation-box"></div>
+    </div>
+  </div>
+<div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item"><h3>Is BMI different for men and women?</h3><p>The BMI formula itself is the same, but healthy body fat percentages differ by gender. Women naturally carry more body fat than men at the same BMI. This calculator accounts for gender when giving personalized recommendations.</p></div>
+    <div class="faq-item"><h3>Does BMI change with age?</h3><p>Yes. As we age, muscle mass tends to decrease and body fat increases. Older adults may be at higher health risk even at a "normal" BMI, while slightly higher BMI (25–27) in adults over 65 may actually be protective. This calculator factors in your age for tailored advice.</p></div>
+    <div class="faq-item"><h3>Why is this calculator only for adults 18+?</h3><p>BMI for children and teenagers is calculated differently — it uses age and gender-specific percentiles from growth charts, not fixed cutoffs like adult BMI. If you need a BMI calculation for someone under 18, please consult a pediatrician.</p></div>
+    <div class="faq-item"><h3>What is a healthy BMI for women?</h3><p>For women, a BMI between 18.5 and 24.9 is generally considered healthy. However, women naturally have higher body fat than men at the same BMI, so some experts suggest a slightly lower upper threshold of 24 for women.</p></div>
+    <div class="faq-item"><h3>How can I lose weight safely?</h3><p>The CDC recommends losing 1–2 pounds per week as a safe, sustainable rate. This is achieved through a combination of moderate calorie reduction (about 500 calories/day deficit) and increased physical activity. Crash diets are not recommended as they often lead to muscle loss and rebound weight gain.</p></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Calqly — Free calculators, no sign-up required.</p>
+  <p style="margin-top:6px;">
+    <a href="index.html">Loan</a>
+    <a href="bmi.html">BMI</a>
+    <a href="interest.html">Interest</a>
+    <a href="percentage.html">Percentage</a>
+  </p>
+  <p style="margin-top:6px;">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="contact.html">Contact</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px;">Results are estimates for informational purposes only. Consult a qualified professional before making decisions.</p>
+</footer>
+
+<script>
+let unit='us', gender='male';
+
+function setUnit(u,el){
+  unit=u;
+  document.querySelectorAll('.toggle-row:first-child .ttab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('us-fields').style.display=u==='us'?'block':'none';
+  document.getElementById('metric-fields').style.display=u==='metric'?'block':'none';
+  liveCalc();
+}
+
+function setGender(g,el){
+  gender=g;
+  document.getElementById('g-male').classList.toggle('on',g==='male');
+  document.getElementById('g-female').classList.toggle('on',g==='female');
+  liveCalc();
+}
+
+function checkAge(){
+  const age=parseInt(document.getElementById('age').value)||0;
+  const warn=document.getElementById('age-warn');
+  const btn=document.getElementById('calc-btn');
+  if(age>0&&age<18){
+    warn.style.display='block';
+    btn.disabled=true;
+    document.getElementById('main-res').classList.remove('show');
+  } else {
+    warn.style.display='none';
+    btn.disabled=false;
+    if(age>=18) liveCalc();
+  }
+}
+
+const motivations = {
+  underweight: [
+    "Every bite is a step toward your strongest self. You've got this.",
+    "Building your body is a journey — small consistent gains add up to big results.",
+    "Your health is your greatest investment. Nourish it daily."
+  ],
+  normal: [
+    "You're doing great — maintaining a healthy weight is an achievement worth celebrating!",
+    "Balance is everything. Keep up the habits that got you here.",
+    "A healthy body supports a healthy mind. You're on the right track!"
+  ],
+  overweight: [
+    "Progress, not perfection. Every healthy choice moves you forward.",
+    "You don't have to be perfect to make progress. Start with one small change today.",
+    "The best time to start is now. The second best time is also now."
+  ],
+  obese: [
+    "Change starts with one decision. You've already made it by being here.",
+    "Every journey begins with a single step. You're taking yours right now.",
+    "You are worth the effort it takes to be healthy. Be patient and kind to yourself."
+  ]
+};
+
+function getTips(cat, gender, age){
+  const isFemale = gender==='female';
+  const isOlder = age>=50;
+
+  const tips = {
+    underweight: {
+      color:'blue',
+      headline: `<strong>Your BMI is below the healthy range.</strong> Here's how to gain weight healthily:`,
+      items: [
+        {icon:'▲', cls:'blue', text:'Eat more frequently — aim for 5–6 smaller meals per day instead of 3 large ones.'},
+        {icon:'▲', cls:'blue', text:'Focus on nutrient-dense foods: nuts, avocado, whole grains, lean protein, and dairy.'},
+        {icon:'▲', cls:'blue', text:'Add strength training 3x per week — this builds muscle mass, not just fat.'},
+        {icon:'▲', cls:'blue', text: isFemale ? 'Women should ensure adequate iron and calcium intake — spinach, dairy, and fortified cereals are great.' : 'Men should prioritize protein: aim for 0.8–1g per pound of target bodyweight daily.'},
+        isOlder ? {icon:'▲', cls:'blue', text:'After 50, muscle loss accelerates. Protein intake and resistance training become even more important.'} : null
+      ].filter(Boolean)
+    },
+    normal: {
+      color:'normal',
+      headline: `<strong>Excellent!</strong> Your BMI is in the healthy range. Here's how to stay there:`,
+      items: [
+        {icon:'✓', cls:'green', text:'Keep up at least 150 minutes of moderate exercise per week — the CDC gold standard.'},
+        {icon:'✓', cls:'green', text:'Eat a balanced diet: half your plate vegetables, a quarter protein, a quarter whole grains.'},
+        {icon:'✓', cls:'green', text:'Stay hydrated — aim for 8 glasses of water per day (more if you exercise).'},
+        {icon:'✓', cls:'green', text: isFemale ? 'Women: watch calcium and vitamin D intake, especially important for bone health.' : 'Men: cardiovascular health is key — limit processed meats and saturated fats.'},
+        isOlder ? {icon:'✓', cls:'green', text:'After 50: add balance and flexibility exercises to prevent falls and maintain mobility.'} : null
+      ].filter(Boolean)
+    },
+    overweight: {
+      color:'overweight',
+      headline: `<strong>You're slightly above the healthy range.</strong> Small changes make a big difference:`,
+      items: [
+        {icon:'→', cls:'amber', text:'A deficit of just 500 calories/day leads to ~1 lb of weight loss per week — sustainable and safe.'},
+        {icon:'→', cls:'amber', text:'Start with 30 minutes of walking daily — it burns 150–200 calories and improves mood.'},
+        {icon:'→', cls:'amber', text:'Reduce ultra-processed foods, sugary drinks, and alcohol — these are the biggest hidden calorie sources.'},
+        {icon:'→', cls:'amber', text: isFemale ? 'Women: hormonal changes (especially after 40) can affect weight. Focus on sleep and stress management.' : 'Men: belly fat is particularly linked to heart disease risk. Prioritize cardio exercise.'},
+        isOlder ? {icon:'→', cls:'amber', text:'After 50: metabolism slows by about 10%. Slightly reducing portions while increasing protein preserves muscle.'} : null
+      ].filter(Boolean)
+    },
+    obese: {
+      color:'obese',
+      headline: `<strong>Your BMI indicates obesity.</strong> Here's a realistic starting plan:`,
+      items: [
+        {icon:'!', cls:'amber', text:'Consult your doctor first — they can rule out medical causes and help create a safe plan for you.'},
+        {icon:'→', cls:'amber', text:'Start with low-impact exercise: swimming, cycling, or walking — these protect your joints.'},
+        {icon:'→', cls:'amber', text:'Focus on what you ADD, not just what you remove: more vegetables, water, and sleep.'},
+        {icon:'→', cls:'amber', text:'Aim for 1–2 lbs per week maximum — faster weight loss often backfires long-term.'},
+        {icon:'→', cls:'amber', text: isFemale ? 'Women: consider a registered dietitian who specializes in women\'s health for personalized guidance.' : 'Men: even modest weight loss of 5–10% of body weight significantly reduces heart disease risk.'}
+      ]
+    }
+  };
+  return tips[cat] || tips.normal;
+}
+
+function liveCalc(){
+  const age=parseInt(document.getElementById('age').value)||30;
+  if(age<18) return;
+
+  let bmi, loW, hiW, weightLbl;
+  if(unit==='us'){
+    const ft=parseFloat(document.getElementById('ft').value)||5;
+    const inc=parseFloat(document.getElementById('inch').value)||9;
+    const h=ft*12+inc;
+    const w=parseFloat(document.getElementById('lbs').value)||160;
+    bmi=(w/(h*h))*703;
+    loW=Math.round(18.5*(h*h)/703);
+    hiW=Math.round(24.9*(h*h)/703);
+    weightLbl='lbs';
+    var curW=w;
+  } else {
+    const h=parseFloat(document.getElementById('cm').value)||175;
+    const w=parseFloat(document.getElementById('kg').value)||70;
+    const hm=h/100;
+    bmi=w/(hm*hm);
+    loW=Math.round(18.5*hm*hm);
+    hiW=Math.round(24.9*hm*hm);
+    weightLbl='kg';
+    var curW=w;
+  }
+
+  let cat, catKey, tipClass;
+  if(bmi<18.5){cat='Underweight';catKey='underweight';tipClass='underweight';}
+  else if(bmi<25){cat='Normal weight';catKey='normal';tipClass='normal';}
+  else if(bmi<30){cat='Overweight';catKey='overweight';tipClass='overweight';}
+  else{cat='Obese';catKey='obese';tipClass='obese';}
+
+  let diff;
+  if(bmi<18.5) diff='+'+Math.round(loW-curW)+' '+weightLbl+' to gain';
+  else if(bmi>=25) diff='-'+Math.round(curW-hiW)+' '+weightLbl+' to lose';
+  else diff='On target!';
+
+  const pct=Math.min(Math.max((bmi-10)/30*100,2),98);
+  document.getElementById('r-bmi').textContent=bmi.toFixed(1);
+  document.getElementById('r-cat').textContent=cat;
+  document.getElementById('r-range').textContent=loW+'–'+hiW+' '+weightLbl;
+  document.getElementById('r-diff').textContent=diff;
+  document.getElementById('bmi-dot').style.left=pct.toFixed(1)+'%';
+
+  const tips=getTips(catKey, gender, age);
+  document.getElementById('tip-box').className='tip-box '+tipClass;
+  document.getElementById('tip-box').innerHTML=tips.headline;
+
+  const tipsHtml=`<div class="tips-title">${catKey==='normal'?'Tips to stay healthy':'Action plan'}</div>`+
+    tips.items.map(t=>`<div class="tip-item"><div class="tip-icon ${t.cls}">${t.icon}</div><div>${t.text}</div></div>`).join('');
+  document.getElementById('tips-section').innerHTML=tipsHtml;
+
+  const motivList=motivations[catKey];
+  const quote=motivList[Math.floor(Math.random()*motivList.length)];
+  document.getElementById('motivation-box').innerHTML=`<strong>Daily reminder</strong>"${quote}"`;
+
+  document.getElementById('main-res').classList.add('show');
+}
+
+liveCalc();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Calqly BMI Calculator","url":"https://calqly.netlify.app/bmi.html","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free BMI calculator for adults 18+. Includes age, gender, tips to lose or gain weight.","areaServed":{"@type":"Country","name":"United States"}}
+</script>
+
+
+</body>
+</html>
